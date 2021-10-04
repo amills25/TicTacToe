@@ -1,3 +1,154 @@
+#### Ian Pseudocode 10/4
+##### Pseudocode of a class
+
+##### dev ops
+* setting up repo
+* deciding on final wireframe layout
+
+<!-- Tic Tac Toe Design Pattern -->
+
+<!-- singleton -- it exists only once -->
+#### Game / Board Class
+<!-- Parent -->
+##### Model
+<!-- Constructor -->
+###### Constant Data
+* gameExists? boolean <!-- so only one game ever exists -->
+* win conditions -- could be data/ could be abstracted
+ * 0,0
+ * 1,0
+ * 2,0
+ * ^^ win condition
+```
+[
+     [x,"",o]
+     [x,"",o]
+     [x,"",""]
+]
+```
+
+
+###### Stateful logic 
+* placement of x and o
+1. list of coordinate variables
+ * x1,y1 => "", etc.
+2. array of coordinate variables
+ * ["","","","O","","","X","",""]
+3.  2d array of coordinate variables
+ ```
+   [
+     ["","",""]
+     ["","",""]
+     ["","",""]
+   ]
+```
+4. array of objects of moves
+<!-- the lowest state footprint -> largest upfront cost -->
+ ```
+ {
+     x:0,
+     y:2,
+     turn: "x"
+ }
+ {
+     x:0,
+     y:1,
+     turn: "o"
+ }
+ ```
+
+* whose turn is it?
+ * x
+ * o
+
+* number of turns
+ * checking if we should check the win (at least 5 turns)
+ * whose turn is it? 
+```
+ num = 0; OR array.length
+ if (num%2==0){
+     //it's x's turn
+ } else {
+     //it's o's turn
+ }
+```
+
+* game ended?
+
+
+* tie?
+
+* restarted?
+<!-- does not need to be a state. just a function that runs on a click -->
+ * run init()
+
+##### View
+* generateHTML() -- could be global, or passed down to children
+* createGrid()
+* createBoard()?
+* showWinOrTie()
+* showCurrentPlayer()
+* showScore()?
+
+##### Controller Methods
+* init()
+* restart()
+
+* check win
+ * abstract data example 1
+```
+[
+     [1,"",2]
+     [1,1,2]
+     [2,1,2]
+]
+```
+ * top row: 3
+ * middle row: 3
+ * bottom row: 1
+ * diagonal left: 1
+ * diagonal right: 3
+ * col right: 4
+ * col middle: 0
+ * col left: 3
+
+ * abstract data example 2 
+```
+for loop i = 0 > 2
+    for loop j = 0 > 2
+```
+* updateClickArray()
+ * or updateCoordGrid()
+ * if checkTieOrWinner
+ * showWinOrTie()
+ * else game not ended
+ * showCurrentPlayer()
+
+* updateWinner()
+ 
+
+#### Tile / Button Class
+<!-- Child -->
+<!-- Regular class -- there can be more than one -->
+##### Model
+* who clicked: "", "x", "o"
+* if its been clicked //abstracted
+ * true/false OR whoclicked.length
+* does NOT need to know where it is, that is the responsibility of the Board
+
+##### View
+<!-- could inherit the generateHTML method -->
+* createTile()?
+ * generateHTML('div', 'col-4')
+* updateView()
+ * render x, o, or blank
+
+##### Controller
+* onClick()
+ * runs view method
+ * runs methods from parent (if needed)
+
+
 #### Deconstruct and Identify
 ##### NOTES from 09/30 whiteboard
 Things to think about
@@ -19,7 +170,6 @@ let ttt = new TicTacToe();
  * what are the events?
  * what are the win-conditions?
 
-
 #### Functionality
 I want to be able to have 2 users interacting in a game of tic-tac-toe, selecting O or X in the given square of the grid, and IF if there was a winner and how it was achieved.
 
@@ -33,6 +183,7 @@ I want to be able to have 2 users interacting in a game of tic-tac-toe, selectin
  * holds state
 * Controller
  * an action happened, now update model
+* turns
 
 ### START
 what happens in between?
@@ -49,3 +200,6 @@ what happens in between?
 * generateHTML()
  * setting up our game board
  * changing on state when user plays
+ * show whose turn it is
+* resetGame()
+ * runs init()
