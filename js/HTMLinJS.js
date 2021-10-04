@@ -3,14 +3,24 @@ const app = document.getElementById("app");
 //innerHTML -- unsafe
 //innerText -- safe
 
-{/* <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div> */}
+{/* 
+// 15 lines
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div> 
+        </div> 
+    </div> 
+</div>
+*/}
 
 // let paragraph = document.createElement('p')
 // paragraph.innerText = 'Some quick example text to build on the card title and make up the bulk of the card\'s content.'
@@ -61,12 +71,12 @@ let a2 = generateHTML({ type: 'a', classes: 'card-link', text: 'Another link', h
 paragraph.innerText = "ended program";
 
 //Model code
-let array = ['hello', 'my', 'name', 'is', 'Ian']; // start with a default array of strings, but maybe can add or change
+let array = ['hello', 'my', 'name', 'is', 'ian', 'and']; // start with a default array of strings, but maybe can add or change
 let elementArray = [];
 
 //dynamic rendering
 for (let index = 0; index < 100; index++) {
-    let element = generateHTML ({type: 'div', calsses: 'col', parent: row2, text: index})
-    elementArray.push(element);
+    let element = generateHTML({ type: 'div', classes: 'col', parent: row2, text: index })
+    elementArray.push(element)
 }
 console.log({elementArray});
