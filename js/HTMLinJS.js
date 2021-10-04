@@ -12,13 +12,24 @@ const app = document.getElementById("app");
   </div>
 </div> */}
 
+// let paragraph = document.createElement('p')
+// paragraph.innerText = 'Some quick example text to build on the card title and make up the bulk of the card\'s content.'
+// paragraph.className = 'card-text' // method 1
+// paragraph.classList.add('card-text') // method 2
+// paragraph.classList.remove('img-fluid')
+
 //Controller method (this is better)
 // OR
 //global helper method that the View uses
-function generateHTML({type, classes, text = '', href='', parent = null}) {
+function generateHTML({ type, classes, text = '', href = '', parent = null }) {
     let element = document.createElement(type);
     element.className = classes;
     element.innerText = text;
+
+    // TODO:
+    // event listeners
+    // id
+    // value, data, checked, clicked
 
     //this is not the limit to what can be done in this helper function
     if (href.length > 0){
@@ -34,16 +45,17 @@ function generateHTML({type, classes, text = '', href='', parent = null}) {
 
 //View code
 //procedural rendering
-let container = generateHTML('div', 'container');
-let row = generateHTML('div', 'row');
-let col = generateHTML('div', 'col');
-let paragraph = generateHTML('p', 'card-text', "Some quick example text to build on the card title and make up the bulk of the card's content.");
-let h5 = generateHTML('h5', 'card-title', "card title");
-let h6 = generateHTML('h6', 'card-subtitle', "card subtitle");
-let a1 = generateHTML('a', 'card-link', "card link", '#');
-let a2 = generateHTML('a', 'card-link', "card link", '#');
-let card = generateHTML('div', 'card');
-let cardBody = generateHTML('div', 'card-body');
+let container = generateHTML({ type: 'div', classes: 'container', parent: app })
+let row = generateHTML({ type: 'div', classes: 'row', parent: container })
+let row2 = generateHTML({ type: 'div', classes: 'row', parent: container })
+let col = generateHTML({ type: 'div', classes: 'col-md-4 col-sm-12 offset-md-4 mt-3', parent: row })
+let card = generateHTML({ type: 'div', classes: 'card', parent: col })
+let cardBody = generateHTML({ type: 'div', classes: 'card-body', parent: card })
+let h5 = generateHTML({ type: 'h5', classes: 'card-title', text: 'Card title', parent: cardBody })
+let h6 = generateHTML({ type: 'h6', classes: 'card-subtitle mb-2', text: 'Card subtitle', parent: cardBody })
+let paragraph = generateHTML({ type: 'p', classes: 'card-text', text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', parent: cardBody })
+let a1 = generateHTML({ type: 'a', classes: 'card-link', text: 'Card link', href: '#', parent: cardBody })
+let a2 = generateHTML({ type: 'a', classes: 'card-link', text: 'Another link', href: '#', parent: cardBody })
 
 //one line of code to change something
 paragraph.innerText = "ended program";
