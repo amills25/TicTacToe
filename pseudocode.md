@@ -1,3 +1,4 @@
+#### Deconstruct and Identify
 ##### NOTES from 09/30 whiteboard
 Things to think about
 1. Dynamically build UI
@@ -19,17 +20,25 @@ let ttt = new TicTacToe();
  * what are the win-conditions?
 
 
-#### Variables and such
+#### Functionality
+I want to be able to have 2 users interacting in a game of tic-tac-toe, selecting O or X in the given square of the grid, and IF if there was a winner and how it was achieved.
+
+#### Objects and Data Structures
 * player1
 * player2
 * class TicTacToe{}
 * ttt
 
-* INIT()
 
 ### START
 what happens in between?
+* INIT()
 ### END
 
 #### Functions and such
 * init()
+* drawX()
+* drawO()
+* show()
+* hide()
+* win()
