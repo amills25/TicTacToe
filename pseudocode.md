@@ -3,7 +3,7 @@ Things to think about
 1. Dynamically build UI
 2. Understand what State is
 ```
-Class TicTacToe
+class TicTacToe {
 let ttt = new TicTacToe();
     constructor
 }
@@ -19,8 +19,17 @@ let ttt = new TicTacToe();
  * what are the win-conditions?
 
 
-##### INIT()
+#### Variables and such
+* player1
+* player2
+* class TicTacToe{}
+* ttt
+
+* INIT()
 
 ### START
 what happens in between?
 ### END
+
+#### Functions and such
+* init()
