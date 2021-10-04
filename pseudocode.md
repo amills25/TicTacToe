@@ -28,7 +28,11 @@ I want to be able to have 2 users interacting in a game of tic-tac-toe, selectin
 * player2
 * class TicTacToe{}
 * ttt
-
+* Model
+* View
+ * holds state
+* Controller
+ * an action happened, now update model
 
 ### START
 what happens in between?
@@ -42,3 +46,6 @@ what happens in between?
 * show()
 * hide()
 * win()
+* generateHTML()
+ * setting up our game board
+ * changing on state when user plays
