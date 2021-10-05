@@ -29,8 +29,6 @@ const app = document.getElementById("app");
 // paragraph.classList.remove('img-fluid')
 
 //Controller method (this is better)
-// OR
-//global helper method that the View uses
 function generateHTML({ type, classes, text = '', href = '', parent = null }) {
     let element = document.createElement(type);
     element.className = classes;
