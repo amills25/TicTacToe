@@ -7,10 +7,15 @@
 
 <!-- Tic Tac Toe Design Pattern -->
 
-* init()
+```
+function init() {
+    restart();
+    createBoard();
+}
+```
 
 <!-- singleton -- it exists only once -->
-#### Game / Board Class
+#### TicTacToe Class
 <!-- Parent -->
 ##### Model
 <!-- Constructor -->
@@ -22,25 +27,51 @@ if (gameExists) {
 }
 ```
 
-* win conditions -- could be data/ could be abstracted
- * 0,0
- * 1,0
- * 2,0
- * ^^ win condition
+* win conditions
 ```
+let x=1;
+let o=2;
+example array grid:
 [
-     [x,"",o]
-     [x,"",o]
-     [x,"",""]
+     [1,0,2]
+     [1,1,2]
+     [2,1,2]
 ]
 ```
+ * Example of values:
+ * topRow: 3 [0,0],[0,1],[0,2]
+ * midRow: 4 [1,0],[1,1],[1,2]
+ * botRow: 5 [2,0],[2,1],[2,2]
+ * diagFromLeft: 4 [0,0],[1,1],[2,2]
+ * diagFromRight: 5 [0,2],[1,1],[2,0]
+ * colLeft: 4 [0,0],[1,0],[2,0]
+ * colMid: 2 [0,1],[1,1],[2,1]
+ * colRight: 6 [0,2],[1,2],[2,2]
 
+```
+if (row, col, or diag / 3 == 1){
+    gameOver();
+}
+if (row, col, or diag / 3 == 2){
+    gameOver();
+}
+```
 
 ###### Stateful logic 
 * placement of x and o
- * array of objects of moves
+ * array of objects of moves 
 <!-- the lowest state footprint -> largest upfront cost -->
  ```
+ x could be 0,1,2
+ y could be 0,1,2
+
+ if (numTurn % 2 == 0){
+     //it's x's turn
+ } else {
+     //it's o's turn
+ }
+
+ example:
  {
      x:0,
      y:2,
@@ -53,21 +84,25 @@ if (gameExists) {
  }
  ```
 
+* number of turns
+ * checking if we should check the win (at least 5 turns)
+```
+let numTurn = 0;
+if(numTurn > 4) {
+    winConditions();
+}
+```
+
 * whose turn is it?
  * x
  * o
-
-* number of turns
- * checking if we should check the win (at least 5 turns)
- * whose turn is it? 
-```
- num = 0; OR array.length
- if (num%2==0){
+ ```
+ if (numTurn % 2 == 0){
      //it's x's turn
  } else {
      //it's o's turn
  }
-```
+ ```
 
 * game ended?
 ```
@@ -100,12 +135,20 @@ function restartBtnMethod() {
 
 
 ##### View
-* generateHTML() -- could be global, or passed down to children
-* createGrid()
-* createBoard()?
+* generateHTML() -- could be global, or passed down to children <!--NEED TO DO -->
+* createBoard() <!--NEED TO DO -->
 * showWinOrTie()
+```
+gameOver();
+```
 * showCurrentPlayer()
-* showScore()?
+ ```
+ if (numTurn % 2 == 0){
+     xTurn.innerHTML = "It's player X's turn.";
+ } else {
+     oTurn.innerHTML = "It's player O's turn.";
+ }
+ ```
 
 ##### Controller Methods
 
@@ -117,57 +160,41 @@ function restart() {
 }
 ```
 
-* check win
- * abstract data example 1
+* check win 
 ```
-[
-     [1,"",2]
-     [1,1,2]
-     [2,1,2]
-]
+IF a row, col, or diag are >= 3 AND no values are empty
+    winConditions();
 ```
- * top row: 3
- * middle row: 3
- * bottom row: 1
- * diagonal left: 1
- * diagonal right: 3
- * col right: 4
- * col middle: 0
- * col left: 3
 
- * abstract data example 2 
-```
-for loop i = 0 > 2
-    for loop j = 0 > 2
-```
-* updateClickArray()
+* updateClickArray() <!--NEED TO DO -->
  * or updateCoordGrid()
  * if checkTieOrWinner
  * showWinOrTie()
  * else game not ended
  * showCurrentPlayer()
 
-* updateWinner()
+* updateWinner() 
+ * gameOver()?
  
 
-#### Tile / Button Class
+#### Tile Class
 <!-- Child -->
 <!-- Regular class -- there can be more than one -->
 ##### Model
-* who clicked: "", "x", "o"
-* if its been clicked //abstracted
+* who clicked: "", "x", "o" <!--NEED TO DO -->
+* if its been clicked //abstracted <!--NEED TO DO -->
  * true/false OR whoclicked.length
-* does NOT need to know where it is, that is the responsibility of the Board
+<!-- does NOT need to know where it is, that is the responsibility of the Board  -->
 
 ##### View
 <!-- could inherit the generateHTML method -->
-* createTile()?
+* createTile()? <!--NEED TO DO -->
  * generateHTML('div', 'col-4')
-* updateView()
+* updateView() <!--NEED TO DO -->
  * render x, o, or blank
 
 ##### Controller
-* onClick()
+* onClick() <!--NEED TO DO -->
  * runs view method
  * runs methods from parent (if needed)
 
