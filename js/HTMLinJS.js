@@ -62,9 +62,6 @@ for (let index = 0; index < 100; index++) {
 }
 console.log({elementArray});
 
-//one line of code to change something
-paragraph.innerText = "ended program";
-
 
 //View code
 //procedural rendering
@@ -79,3 +76,6 @@ let h6 = generateHTML({ type: 'h6', classes: 'card-subtitle mb-2', text: 'Card s
 let paragraph = generateHTML({ type: 'p', classes: 'card-text', text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', parent: cardBody })
 let a1 = generateHTML({ type: 'a', classes: 'card-link', text: 'Card link', href: '#', parent: cardBody })
 let a2 = generateHTML({ type: 'a', classes: 'card-link', text: 'Another link', href: '#', parent: cardBody })
+
+//one line of code to change something
+paragraph.innerText = "ended program";

@@ -1,175 +1,134 @@
-function init() {
-    restart();
-    createBoard();
-}
 
 {/* <div class="container">
-        <div class="row">
-            <div class="col">
+<div class="row">
+<div class="col">
+Column
+</div>
+<div class="col">
+Column
+</div>
+<div class="col">
+Column
+</div>
+</div>
+<div class="row">
+<div class="col">
+Column
+</div>
+<div class="col">
+Column
+</div>
+<div class="col">
                 Column
             </div>
+            </div>
+            <div class="row">
             <div class="col">
                 Column
-            </div>
-            <div class="col">
+                </div>
+                <div class="col">
                 Column
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
+                </div>
+                <div class="col">
                 Column
-            </div>
-            <div class="col">
-                Column
-            </div>
-            <div class="col">
-                Column
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                Column
-            </div>
-            <div class="col">
-                Column
-            </div>
-            <div class="col">
-                Column
-            </div>
+                </div>
         </div>
     </div> */}
 
 
 //TicTacToe Game Class
 class TicTacToe {
-    constructor() {
-        //Model object
-        class Model {
-            constructor() {
-    
-            }
-            init() {
-    
-            }
-            setState(s) {
-                this.counter = s;
-            }
-        }
-    
-        //View object
-        class View {
-            constructor() {
-    
-            }
-    
-            init() {
-                console.log("View.init()");
-            }
-    
-            updateUI() {
-    
-            }    
-    
-        }
-        
-        //Controller object
-        class Controller {
-            constructor() {
-                const app = document.getElementById("app");
-                function generateHTML({ type, classes, text = '', parent = null }) {
-                    let element = document.createElement(type);
-                    element.className = classes;
-                    element.innerText = text;
-            
-                    // TODO:
-                    // event listeners
-                    // id
-                    // value, data, checked, clicked
-            
-                    //this is not the limit to what can be done in this helper function
-                    if (parent) {
-                        parent.appendChild(element);
-                    }
-            
-                    return element;
-                }
-                
-                let gridArray = [
-                    [
-                        [0, 0, 0]
-                        [0, 0, 0]
-                        [0, 0, 0]
-                    ]
-                ];
-                for (let index = 0; index < 100; index++) {
-                        let element = generateHTML({ type: 'div', classes: 'col', parent: row2, text: index })
-                        gridArray.push(element)
-                }
-            }
-            
-            init() {
-                console.log("Controller.init()");
-    
-            }
-    
-            handleClick(e) {
-    
-            }
+    constructor() { //i will need to put things in here
+        //Model
+        this.array = [
+            [0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0],
+        ];
+        this.gridArray = [];
+
+        this.app = document.getElementById("app");
+    }
+
+    //View methods
+    generateView() {
+        //procedural rendering
+        let container = this.generateHTML({ type: 'div', classes: 'container', parent: this.app })
+        let row = this.generateHTML({ type: 'div', classes: 'row', parent: container })
+        //let col = generateHTML({ type: 'div', classes: 'col-4', parent: row })
+
+        //dynamic rendering
+        for (let index = 0; index < 9; index++) {
+            let element = this.generateHTML({ type: 'div', classes: 'col-4 text-center border border-dark', text: index, parent: row });
+            this.gridArray.push(element);
+            //save tile object as well
         }
     }
+
+
+    generateHTML({ type, classes, parent = null, text='' }) {
+        let element = document.createElement(type);
+        element.className = classes;
+        element.innerText = text;
+
+        // TODO:
+        // event listeners
+        // id
+        // value, data, clicked
+
+        //this is not the limit to what can be done in this helper function
+        if (parent) {
+            parent.appendChild(element);
+        }
+
+        return element;
+    }
+
+    updateView() {
+
+    }
+
+
+    //Controller methods
+    init() {
+        console.log("init(TicTacToe)");
+
+    }
+
+    handleClick(e) {
+
+    }
 }
+
 
 //Individual Tile Class
 class Tile {
     constructor() {
-        //Model object
-        class Model {
-            constructor() {
-                this.counter;
-            }
-            init() {
-                console.log("Model.init()");
+        //Model
 
-            }
-            setState(s) {
-
-            }
-        }
-    
-        //Controller object
-        class Controller {
-            constructor() {
-    
-            }
-            init() {
-                console.log("Controller.init()");
-            }
-            handleClick(e) {
-    
-            }
-        }
-    
-        //View object
-        class View {
-            constructor() {
-    
-            }
-            init() {
-                console.log("View.init()");
-            }
-            updateUI() {
-    
-            }
-        }
     }
+
+    //Controller methods
+    handleClick(e) {
+
+    }
+
+    //don't necessarily need this because the parent made it
+    init() {
+        console.log("View.init()");
+    }
+
+    //View methods
+    //view is generated by the parent
+    updateView() {
+
+    }
+
 }
 
-//function to hide elements
-function hide(element) {
-    element.style.visibility = "hidden";
+function init() {
+    let game = new TicTacToe();
+    game.generateView();
 }
 
-//function to show elements
-function show(element) {
-    element.style.visibility = "visible";
-}
+init();

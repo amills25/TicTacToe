@@ -38,7 +38,7 @@ example array grid:
      [2,1,2]
 ]
 ```
- * Example of values:
+ * Example of values (8 possible win conditions):
  * topRow: 3 [0,0],[0,1],[0,2]
  * midRow: 4 [1,0],[1,1],[1,2]
  * botRow: 5 [2,0],[2,1],[2,2]
