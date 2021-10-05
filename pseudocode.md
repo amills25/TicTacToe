@@ -7,6 +7,8 @@
 
 <!-- Tic Tac Toe Design Pattern -->
 
+* init()
+
 <!-- singleton -- it exists only once -->
 #### Game / Board Class
 <!-- Parent -->
@@ -14,6 +16,12 @@
 <!-- Constructor -->
 ###### Constant Data
 * gameExists? boolean <!-- so only one game ever exists -->
+```
+if (gameExists) {
+    init();
+}
+```
+
 * win conditions -- could be data/ could be abstracted
  * 0,0
  * 1,0
@@ -30,19 +38,7 @@
 
 ###### Stateful logic 
 * placement of x and o
-1. list of coordinate variables
- * x1,y1 => "", etc.
-2. array of coordinate variables
- * ["","","","O","","","X","",""]
-3.  2d array of coordinate variables
- ```
-   [
-     ["","",""]
-     ["","",""]
-     ["","",""]
-   ]
-```
-4. array of objects of moves
+ * array of objects of moves
 <!-- the lowest state footprint -> largest upfront cost -->
  ```
  {
@@ -74,13 +70,34 @@
 ```
 
 * game ended?
-
+```
+let winText;
+function gameOver() {
+    IF playerX meets winConditions(){
+        winText.innerText = "Player X has won the game!"
+    } ELSE IF playerO meets winConditions(){
+        winText.innerText = "Player O has won the game!"
+    } ELSE {
+        tieMethod();
+    }
+}
+```
 
 * tie?
+```
+let tieText;
+function tieMethod(){
+    tieText.innerText = "Game has ended in a tie."
+}
+```
 
 * restarted?
-<!-- does not need to be a state. just a function that runs on a click -->
- * run init()
+```
+function restartBtnMethod() {
+    restart();
+}
+```
+
 
 ##### View
 * generateHTML() -- could be global, or passed down to children
@@ -91,8 +108,14 @@
 * showScore()?
 
 ##### Controller Methods
-* init()
+
 * restart()
+<!-- does not need to be a state. just a function that runs on a click -->
+```
+function restart() {
+    init();
+}
+```
 
 * check win
  * abstract data example 1
