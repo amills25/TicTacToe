@@ -51,6 +51,21 @@ function generateHTML({ type, classes, text = '', href = '', parent = null }) {
     return element;
 }
 
+//Model code
+let array = ['hello', 'my', 'name', 'is', 'ian', 'and']; // start with a default array of strings, but maybe can add or change
+let elementArray = [];
+
+//dynamic rendering
+for (let index = 0; index < 100; index++) {
+    let element = generateHTML({ type: 'div', classes: 'col', parent: row2, text: index })
+    elementArray.push(element)
+}
+console.log({elementArray});
+
+//one line of code to change something
+paragraph.innerText = "ended program";
+
+
 //View code
 //procedural rendering
 let container = generateHTML({ type: 'div', classes: 'container', parent: app })
@@ -64,17 +79,3 @@ let h6 = generateHTML({ type: 'h6', classes: 'card-subtitle mb-2', text: 'Card s
 let paragraph = generateHTML({ type: 'p', classes: 'card-text', text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.', parent: cardBody })
 let a1 = generateHTML({ type: 'a', classes: 'card-link', text: 'Card link', href: '#', parent: cardBody })
 let a2 = generateHTML({ type: 'a', classes: 'card-link', text: 'Another link', href: '#', parent: cardBody })
-
-//one line of code to change something
-paragraph.innerText = "ended program";
-
-//Model code
-let array = ['hello', 'my', 'name', 'is', 'ian', 'and']; // start with a default array of strings, but maybe can add or change
-let elementArray = [];
-
-//dynamic rendering
-for (let index = 0; index < 100; index++) {
-    let element = generateHTML({ type: 'div', classes: 'col', parent: row2, text: index })
-    elementArray.push(element)
-}
-console.log({elementArray});

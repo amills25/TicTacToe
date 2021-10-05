@@ -94,10 +94,16 @@ class TicTacToe {
                     return element;
                 }
                 
-                let elementArray = [];
+                let gridArray = [
+                    [
+                        [0, 0, 0]
+                        [0, 0, 0]
+                        [0, 0, 0]
+                    ]
+                ];
                 for (let index = 0; index < 100; index++) {
                         let element = generateHTML({ type: 'div', classes: 'col', parent: row2, text: index })
-                        elementArray.push(element)
+                        gridArray.push(element)
                 }
             }
             

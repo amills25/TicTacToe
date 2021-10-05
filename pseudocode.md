@@ -143,9 +143,9 @@ gameOver();
 * showCurrentPlayer()
  ```
  if (numTurn % 2 == 0){
-     xTurn.innerHTML = "It's player X's turn.";
+     xTurn.innerText = "It's player X's turn.";
  } else {
-     oTurn.innerHTML = "It's player O's turn.";
+     oTurn.innerText = "It's player O's turn.";
  }
  ```
 
@@ -181,22 +181,35 @@ IF a row, col, or diag are >= 3 AND no values are empty
 <!-- Child -->
 <!-- Regular class -- there can be more than one -->
 ##### Model
-* who clicked: "", "x", "o" <!--NEED TO DO -->
-* if its been clicked //abstracted <!--NEED TO DO -->
- * true/false OR whoclicked.length
+* who clicked: "", "x", "o" 
+ * look for xTurn or oTurn from parent
+* if its been clicked //abstracted 
+ * true/false
 <!-- does NOT need to know where it is, that is the responsibility of the Board  -->
+
 
 ##### View
 <!-- could inherit the generateHTML method -->
 * createTile()? <!--NEED TO DO -->
  * generateHTML('div', 'col-4')
-* updateView() <!--NEED TO DO -->
+* updateView()
  * render x, o, or blank
+```
+Look in parent
+IF xTurn {
+    xDraw.innerText = "X";
+} ELSE {
+    oDraw.innerText = "O";
+}
+```
 
 ##### Controller
-* onClick() <!--NEED TO DO -->
+* onClick() 
  * runs view method
  * runs methods from parent (if needed)
+```
+tileClick.addEventListener('click', updateView);
+```
 
 
 #### Deconstruct and Identify
