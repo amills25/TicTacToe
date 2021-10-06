@@ -100,10 +100,10 @@ class TicTacToe {
 
     //show current player
     currentPlayer(){
-        if (numTurn % 2 == 0) {
-            playerTurn.innerText = "It's player X's turn.";
-        } else {
+        if (this.numTurn % 2 == 0) {
             playerTurn.innerText = "It's player O's turn.";
+        } else {
+            playerTurn.innerText = "It's player X's turn.";
         }
     }
 
@@ -115,20 +115,23 @@ class TicTacToe {
 
     handleClick(index) {
         //console.log(this.gridArray[index]);
-        this.checkTurn();
-        this.currentPlayer();
-        numTurn++;
+        if (!this.gridArray[index].wasClicked) {
+            this.checkTurn(index);
+            this.currentPlayer();
+            this.numTurn++;
+            this.gridArray[index].wasClicked = true;
+        }
     }
 
+    //whose turn is it?
     checkTurn(index) {
-        console.log("in the checkTurn")
+        //console.log(this.numTurn, this.gridArray, index);
         if (this.numTurn % 2 == 0){
             this.gridArray[index].element.innerText = "X";
         } else {
             this.gridArray[index].element.innerText = "O";
         }
     }
-    //whose turn is it?
 
     //restart button
     restart() {
@@ -150,11 +153,9 @@ class TicTacToe {
 class Tile {
     //MODEL
     constructor(element, index) {
-        //who clicked
-
         this.element = element;
         this.index = index;
-        this.clicked = false;
+        this.wasClicked = false;
         this.who = "nobody";
     }
 
