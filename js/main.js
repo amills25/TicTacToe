@@ -67,8 +67,8 @@ class TicTacToe {
         }
 
 //      //variables that will get elements from Tile class and pull it's button attribute
-        let tiles = document.getElementsByClassName("Tile");
-        let attribute = tiles.getAttribute(tileBtn);
+        // let tiles = document.getElementsByClassName("Tile");
+        // let attribute = tiles.getAttribute(tileBtn);
     }
 
     //method to create objects for dynamic rendering
@@ -99,11 +99,13 @@ class TicTacToe {
     //gameOver();
 
     //show current player
-    // if (numTurn % 2 == 0) {
-    //     xTurn.innerText = "It's player X's turn.";
-    // } else {
-    //     oTurn.innerText = "It's player O's turn.";
-    // }
+    currentPlayer(){
+        if (numTurn % 2 == 0) {
+            playerTurn.innerText = "It's player X's turn.";
+        } else {
+            playerTurn.innerText = "It's player O's turn.";
+        }
+    }
 
     //CONTROLLER METHODS
     init() {
@@ -111,19 +113,19 @@ class TicTacToe {
 
     }
 
-    handleClick() {
+    handleClick(index) {
         //console.log(this.gridArray[index]);
-        
         this.checkTurn();
+        this.currentPlayer();
         numTurn++;
     }
 
     checkTurn(index) {
         console.log("in the checkTurn")
-        if (this.numTurn % 2 == 0 || this.numTurn == 0){
-            this.gridArray[index].tile.innerText = "X";
+        if (this.numTurn % 2 == 0){
+            this.gridArray[index].element.innerText = "X";
         } else {
-            this.gridArray[index].tile.innerText = "O";
+            this.gridArray[index].element.innerText = "O";
         }
     }
     //whose turn is it?
