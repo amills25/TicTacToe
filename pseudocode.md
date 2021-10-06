@@ -140,7 +140,8 @@ function restartBtnMethod() {
 
 
 ##### View
-* createBoard() <!--NEED TO DO -->
+* generateView() 
+* generateHTML() -- could be global, or passed down to children <!--NEED TO DO -->
 * showWinOrTie()
 ```
 gameOver();
@@ -155,7 +156,6 @@ gameOver();
  ```
 
 ##### Controller Methods
-* generateHTML() -- could be global, or passed down to children <!--NEED TO DO -->
 
 * restart()
 <!-- does not need to be a state. just a function that runs on a click -->
