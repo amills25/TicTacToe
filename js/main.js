@@ -18,14 +18,15 @@ class TicTacToe {
     //View methods
     generateView() {
         //procedural rendering
-        let container = this.generateHTML({ type: 'div', classes: 'container', parent: this.app })
-        let row = this.generateHTML({ type: 'div', classes: 'row', parent: container, styles: '', id: 0 })
-        //let col = generateHTML({ type: 'div', classes: 'col-4', parent: row })
+        let container = this.generateHTML({ type: 'div', classes: 'container', parent: this.app });
+        let row = this.generateHTML({ type: 'div', classes: 'row', parent: container, styles: '', id: 0 });
+        //let col = generateHTML({ type: 'div', classes: 'col-4 text-center border border-dark lh-lg', parent: row, text: "", styles: 'min-width: 14vw; min-height: 16vw; font-size: 8vw', id: index });
 
         //dynamic rendering
         for (let index = 0; index < 9; index++) {
-            let element = this.generateHTML({ type: 'div', classes: 'col-4 text-center border border-dark lh-lg', parent: row, text: "", styles: 'min-width: 14vw; min-height: 16vw; font-size: 8vw', id: index });
-            this.gridArray.push(element);
+            let col = this.generateHTML({ type: 'div', classes: 'col-4 text-center border border-dark lh-lg', parent: row, text: "", styles: '', id: index });
+            let button = this.generateHTML({ type: 'button', classes: 'btn', parent: col, text: "", styles: 'width: 99%; height: 99%; font-size: 8vw;', text: "X", onclick: "" });
+            this.gridArray.push(col);
             //save tile object as well
         }
 
@@ -35,12 +36,13 @@ class TicTacToe {
     }
 
     //method to create objects for dynamic rendering
-    generateHTML({ type, classes, parent = null, text = '', styles, id }) {
+    generateHTML({ type, classes, parent = null, text = '', styles, id, onclick }) {
         let element = document.createElement(type);
         element.className = classes;
         element.innerText = text;
         element.style = styles;
         element.id = id;
+        element.onclick = onclick;
 
         // TODO:
         // event listeners
