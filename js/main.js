@@ -1,41 +1,3 @@
-
-{/* <div class="container">
-<div class="row">
-<div class="col">
-Column
-</div>
-<div class="col">
-Column
-</div>
-<div class="col">
-Column
-</div>
-</div>
-<div class="row">
-<div class="col">
-Column
-</div>
-<div class="col">
-Column
-</div>
-<div class="col">
-                Column
-            </div>
-            </div>
-            <div class="row">
-            <div class="col">
-                Column
-                </div>
-                <div class="col">
-                Column
-                </div>
-                <div class="col">
-                Column
-                </div>
-        </div>
-    </div> */}
-
-
 //TicTacToe Game Class
 class TicTacToe {
     constructor() { //i will need to put things in here
@@ -54,22 +16,24 @@ class TicTacToe {
     generateView() {
         //procedural rendering
         let container = this.generateHTML({ type: 'div', classes: 'container', parent: this.app })
-        let row = this.generateHTML({ type: 'div', classes: 'row', parent: container })
+        let row = this.generateHTML({ type: 'div', classes: 'row', parent: container, styles: '', id: 0 })
         //let col = generateHTML({ type: 'div', classes: 'col-4', parent: row })
 
         //dynamic rendering
         for (let index = 0; index < 9; index++) {
-            let element = this.generateHTML({ type: 'div', classes: 'col-4 text-center border border-dark', text: index, parent: row });
+            let element = this.generateHTML({ type: 'div', classes: 'col-4 text-center border border-dark lh-lg', parent: row, text: "X", styles: 'min-width: 14vw; min-height: 16vw; font-size: 8vw', id: index });
             this.gridArray.push(element);
             //save tile object as well
         }
     }
 
 
-    generateHTML({ type, classes, parent = null, text='' }) {
+    generateHTML({ type, classes, parent = null, text = '', styles, id }) {
         let element = document.createElement(type);
         element.className = classes;
         element.innerText = text;
+        element.style = styles;
+        element.id = id;
 
         // TODO:
         // event listeners

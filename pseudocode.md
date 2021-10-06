@@ -104,7 +104,12 @@ if(numTurn > 4) {
  }
  ```
 
-* game ended?
+* winConditions() <!-- NEED TO DO -->
+```
+
+```
+
+* game ended? <!-- IF winConditions are not met, it's a tie -->
 ```
 let winText;
 function gameOver() {
