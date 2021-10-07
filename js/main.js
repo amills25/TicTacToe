@@ -15,20 +15,19 @@ class TicTacToe {
 
         //linking dynamic rendering to html
         this.app = document.getElementById("app");
+        
+        //number of turns -- check win conditions after 5 turns or more
+        this.numTurn = 0;
 
         //winConditions
         //tie? -- if winConditions are not met, it must be a tie
-        //placement of x and o
-
-        //number of turns -- check win conditions after 5 turns or more
-        this.numTurn = 0;
 
         if(this.numTurn > 4) {
             winConditions();
         }
 
         //gameOver
-        let winText;
+        this.winText = '';
         //gameOver() {
             // IF playerX meets winConditions(){
             //     winText.innerText = "Player X has won the game!"
@@ -38,7 +37,7 @@ class TicTacToe {
             //     tieMethod();
             // }
         //}
-        let tieText;
+        this.tieText = '';
         // tieMethod() {
         //     tieText.innerText = "Game has ended in a tie."
         // }
@@ -83,6 +82,7 @@ class TicTacToe {
     }
 
     //show win or tie
+    //use the same variable playerTurn?
     //gameOver();
 
     //show current player
@@ -139,10 +139,10 @@ class TicTacToe {
     //check for win
     // IF a row, col, or diag are >= 3 AND no values are empty
     // winConditions();
+    // IF there is a winner, don't allow any more clicking
 
     //update grid
         //show win or tie?
-        //show current player?
     //update winner?
 }
 
