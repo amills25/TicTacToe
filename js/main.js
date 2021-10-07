@@ -22,9 +22,13 @@ class TicTacToe {
         //winConditions
         //tie? -- if winConditions are not met, it must be a tie
 
-        if(this.numTurn > 4) {
-            winConditions();
-        }
+        // if(this.numTurn > 4) {
+        //     winConditions();
+        // }
+
+
+
+        this.gameStatus = "on";
 
         //gameOver
         this.winText = '';
@@ -83,7 +87,37 @@ class TicTacToe {
 
     //show win or tie
     //use the same variable playerTurn?
-    //gameOver();
+    gameOver() {
+        this.possibleWins = 
+        [
+            [0,1,2],
+            [3,4,5],
+            [6,7,8],
+            [0,3,6],
+            [1,4,7],
+            [2,5,8],
+            [0,4,8],
+            [2,4,6],
+        ];
+
+        for (let i = 0; i < this.possibleWins.length; i++) {
+            let winRow = 0;
+            for (let j = 0; j < this.possibleWins[i].length; j++) {
+                winRow += this.gridArray[this.possibleWins[i][j]].value;
+                console.log(winRow);
+                if (winRow === -3) {
+                    this.playerTurn.innerText = "PLAYER X WINS!";
+                } 
+                if (winRow === 3) {
+                    this.playerTurn.innerText = "PLAYER Y WINS!";
+                } 
+            }
+            winRow = 0;
+        }
+        if (this.numTurn == 9 && this.gameStatus == "on"){
+            this.playerTurn.innerText = "IT'S A TIE";
+        }
+    }
 
     //show current player
     currentPlayer() {
@@ -104,11 +138,23 @@ class TicTacToe {
     //what happens when the tile is clicked
     handleClick(index) {
         //console.log(this.gridArray[index]);
-        if (!this.gridArray[index].wasClicked) {
+        if (!this.gridArray[index].wasClicked) { //seeing if it was clicked
             this.checkTurn(index);
+            
+            if (this.numTurn % 2 == 0) { //gives a tile a value so we can check win conditions later
+                this.gridArray[index].value = -1;
+            } else {
+                this.gridArray[index].value = 1;
+            }
+            //console.log(typeof this.gridArray[0].value);
+
             this.currentPlayer();
             this.numTurn++;
             this.gridArray[index].wasClicked = true;
+
+            if (this.numTurn > 4){
+                this.gameOver();
+            }
         }
     }
 
@@ -155,6 +201,7 @@ class Tile {
         this.index = index;
         this.wasClicked = false;
         this.who = "nobody";
+        this.value = 0;
     }
     
 }
