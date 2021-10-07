@@ -107,9 +107,11 @@ class TicTacToe {
                 console.log(winRow);
                 if (winRow === -3) {
                     this.playerTurn.innerText = "PLAYER X WINS!";
+                    this.gameStatus = "off";
                 } 
                 if (winRow === 3) {
                     this.playerTurn.innerText = "PLAYER Y WINS!";
+                    this.gameStatus = "off";
                 } 
             }
             winRow = 0;
@@ -138,7 +140,7 @@ class TicTacToe {
     //what happens when the tile is clicked
     handleClick(index) {
         //console.log(this.gridArray[index]);
-        if (!this.gridArray[index].wasClicked) { //seeing if it was clicked
+        if (!this.gridArray[index].wasClicked && this.gameStatus == "on") { //seeing if it was clicked
             this.checkTurn(index);
             
             if (this.numTurn % 2 == 0) { //gives a tile a value so we can check win conditions later
@@ -179,6 +181,7 @@ class TicTacToe {
     //restart
     restart() {
         this.delete();
+        this.gameStatus = "on";
         this.init();
     }
     
