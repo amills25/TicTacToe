@@ -1,13 +1,7 @@
 //TicTacToe Game Class
 class TicTacToe {
     //MODEL
-    constructor() { // <-- i will need to put things in constructor
-        //example of game array
-        // this.array = [
-        //     [0, 1, 2
-        //     3, 4, 5
-        //     6, 7, 8]
-        // ];
+    constructor() { 
 
         this.playerTurn = document.getElementById("playerTurn");
 
@@ -19,42 +13,18 @@ class TicTacToe {
         //number of turns -- check win conditions after 5 turns or more
         this.numTurn = 0;
 
-        //winConditions
-        //tie? -- if winConditions are not met, it must be a tie
-
-        // if(this.numTurn > 4) {
-        //     winConditions();
-        // }
-
-
-
+        //variable for game being active so it can be turned off after a win
         this.gameStatus = "on";
-
-        //gameOver
-        this.winText = '';
-        //gameOver() {
-            // IF playerX meets winConditions(){
-            //     winText.innerText = "Player X has won the game!"
-            // } ELSE IF playerO meets winConditions(){
-            //     winText.innerText = "Player O has won the game!"
-            // } ELSE {
-            //     tieMethod();
-            // }
-        //}
-        this.tieText = '';
-        // tieMethod() {
-        //     tieText.innerText = "Game has ended in a tie."
-        // }
 
     }
 
     //VIEW METHODS
     generateView() {
-        //procedural rendering
+        //procedural rendering for making grid
         let container = this.generateHTML({ type: 'div', classes: 'container', parent: this.app });
         let row = this.generateHTML({ type: 'div', classes: 'row', parent: container, styles: '', id: 0 });
 
-        //dynamic rendering
+        //dynamic rendering to create the game board
         for (let index = 0; index < 9; index++) {
             let col = this.generateHTML({ type: 'div', classes: 'col-4 text-center border border-dark lh-lg', parent: row, text: "", styles: 'min-width: 16vw; min-height: 14vw;', id: index });
             let button = this.generateHTML({ type: 'button', classes: 'btn', parent: col, text: "", styles: 'min-width: 100%; min-height: 99%; font-size: 8vw;', text: "", onclick: this.handleClick.bind(this, index) });
@@ -81,13 +51,9 @@ class TicTacToe {
         return element;
     }
 
-    updateView() {
-        
-    }
-
-    //show win or tie
-    //use the same variable playerTurn?
+    //win conditions
     gameOver() {
+        //grid variable for possible wins
         this.possibleWins = 
         [
             [0,1,2],
@@ -100,8 +66,11 @@ class TicTacToe {
             [2,4,6],
         ];
 
+        //loop through this array of arrays
+        //add the value of each tile
+        //if a row/col/diag meets a certain value, game is over
         for (let i = 0; i < this.possibleWins.length; i++) {
-            let winRow = 0;
+            let winRow = 0; //variable to calculate the value of each click
             for (let j = 0; j < this.possibleWins[i].length; j++) {
                 winRow += this.gridArray[this.possibleWins[i][j]].value;
                 console.log(winRow);
@@ -110,12 +79,13 @@ class TicTacToe {
                     this.gameStatus = "off";
                 } 
                 if (winRow === 3) {
-                    this.playerTurn.innerText = "PLAYER Y WINS!";
+                    this.playerTurn.innerText = "PLAYER O WINS!";
                     this.gameStatus = "off";
                 } 
             }
-            winRow = 0;
+            winRow = 0; //reset row value to 0 if no winner yet
         }
+        //if every tile has been clicked and no winner, it's a tie
         if (this.numTurn == 9 && this.gameStatus == "on"){
             this.playerTurn.innerText = "IT'S A TIE";
         }
@@ -140,10 +110,12 @@ class TicTacToe {
     //what happens when the tile is clicked
     handleClick(index) {
         //console.log(this.gridArray[index]);
-        if (!this.gridArray[index].wasClicked && this.gameStatus == "on") { //seeing if it was clicked
+        //seeing if it was clicked and game is active
+        if (!this.gridArray[index].wasClicked && this.gameStatus == "on") { 
             this.checkTurn(index);
             
-            if (this.numTurn % 2 == 0) { //gives a tile a value so we can check win conditions later
+            //gives a tile a value so we can check win conditions later
+            if (this.numTurn % 2 == 0) { 
                 this.gridArray[index].value = -1;
             } else {
                 this.gridArray[index].value = 1;
@@ -154,6 +126,7 @@ class TicTacToe {
             this.numTurn++;
             this.gridArray[index].wasClicked = true;
 
+            //run win conditions if 5 or more tiles clicked
             if (this.numTurn > 4){
                 this.gameOver();
             }
@@ -170,6 +143,7 @@ class TicTacToe {
         }
     }
 
+    //clear the board if starting a new game
     delete() {
         //console.log("delete me");
         this.gridArray = [];
@@ -178,21 +152,13 @@ class TicTacToe {
         this.playerTurn.innerText = "It's player X's turn.";
     }
 
-    //restart
+    //restarting a game
     restart() {
         this.delete();
         this.gameStatus = "on";
         this.init();
     }
     
-    //check for win
-    // IF a row, col, or diag are >= 3 AND no values are empty
-    // winConditions();
-    // IF there is a winner, don't allow any more clicking
-
-    //update grid
-        //show win or tie?
-    //update winner?
 }
 
 
@@ -210,7 +176,8 @@ class Tile {
 }
 
 //initializing page
-function init() { //we want to reset the board first, then generate the view
+//we want to reset the board first, then generate the view
+function init() { 
     let game = new TicTacToe();
     game.init();
 }
