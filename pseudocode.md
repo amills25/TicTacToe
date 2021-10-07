@@ -9,8 +9,8 @@
 
 ```
 function init() {
-    restart();
-    createBoard();
+    new game
+    game.init
 }
 ```
 
@@ -20,67 +20,29 @@ function init() {
 ##### Model
 <!-- Constructor -->
 ###### Constant Data
-* gameExists? boolean <!-- so only one game ever exists -->
+* gameStatus = on 
+<!-- later -->
 ```
 if (gameExists) {
-    init();
+    handle click
 }
 ```
 
-* win conditions
-```
-let x=1;
-let o=2;
-example array grid:
-[
-     [1,0,2]
-     [1,1,2]
-     [2,1,2]
-]
-```
- * Example of values (8 possible win conditions):
- * topRow: 3 [0,0],[0,1],[0,2]
- * midRow: 4 [1,0],[1,1],[1,2]
- * botRow: 5 [2,0],[2,1],[2,2]
- * diagFromLeft: 4 [0,0],[1,1],[2,2]
- * diagFromRight: 5 [0,2],[1,1],[2,0]
- * colLeft: 4 [0,0],[1,0],[2,0]
- * colMid: 2 [0,1],[1,1],[2,1]
- * colRight: 6 [0,2],[1,2],[2,2]
+* numTurn = 0
 
-```
-if (row, col, or diag / 3 == 1){
-    gameOver();
-}
-if (row, col, or diag / 3 == 2){
-    gameOver();
-}
-```
+* gridArray = []
 
 ###### Stateful logic 
 * placement of x and o
  * array of objects of moves 
 <!-- the lowest state footprint -> largest upfront cost -->
  ```
- x could be 0,1,2
- y could be 0,1,2
+ numTurn = 0
 
  if (numTurn % 2 == 0){
      //it's x's turn
  } else {
      //it's o's turn
- }
-
- example:
- {
-     x:0,
-     y:2,
-     turn: "x"
- }
- {
-     x:0,
-     y:1,
-     turn: "o"
  }
  ```
 
@@ -104,14 +66,37 @@ if(numTurn > 4) {
  }
  ```
 
-* winConditions() <!-- NEED TO DO -->
+* winConditions()
 ```
+let x=-1;
+let o=1;
 
+if (row, col, or diag % 3 == 0){
+    gameOver();
+}
 ```
+* tie -- if no win, then it's a tie
 
-* game ended? <!-- IF winConditions are not met, it's a tie -->
+
+##### View
+* generateView() 
+* generateHTML() -- could be global, or passed down to children <!--NEED TO DO -->
+* gameOver()
+ * array of arrays of win solutions
+ * nest for loops going through array
+ * if solution total values = ? : x or o wins
+ * if turn>8 and game still on, it's a tie
+* showCurrentPlayer()
+ ```
+ if (numTurn % 2 == 0){
+     xTurn.innerText = "It's player X's turn.";
+ } else {
+     oTurn.innerText = "It's player O's turn.";
+ }
+ ```
+
+ * game ended? <!-- IF winConditions are not met, it's a tie -->
 ```
-let winText;
 function gameOver() {
     IF playerX meets winConditions(){
         winText.innerText = "Player X has won the game!"
@@ -123,63 +108,41 @@ function gameOver() {
 }
 ```
 
-* tie?
-```
-let tieText;
-function tieMethod(){
-    tieText.innerText = "Game has ended in a tie."
-}
-```
-
-* restarted?
-```
-function restartBtnMethod() {
-    restart();
-}
-```
-
-
-##### View
-* generateView() 
-* generateHTML() -- could be global, or passed down to children <!--NEED TO DO -->
-* showWinOrTie()
-```
-gameOver();
-```
-* showCurrentPlayer()
- ```
- if (numTurn % 2 == 0){
-     xTurn.innerText = "It's player X's turn.";
- } else {
-     oTurn.innerText = "It's player O's turn.";
- }
- ```
 
 ##### Controller Methods
+* init()
+ * generate board
+ * reset board
+
+* click handler
+ * check turn
+ * give a click a value
+ * change view
+ * check win conditions
+
+* check turn
+ * see whose turn it is
+
+* delete
+ * set grid values back to empty
 
 * restart()
 <!-- does not need to be a state. just a function that runs on a click -->
 ```
 function restart() {
+    delete();
+    turn game on
     init();
 }
 ```
 
-* check win 
+* check win?
 ```
 IF a row, col, or diag are >= 3 AND no values are empty
     winConditions();
 ```
 
-* updateClickArray() <!--NEED TO DO -->
- * or updateCoordGrid()
- * if checkTieOrWinner
- * showWinOrTie()
- * else game not ended
- * showCurrentPlayer()
-
-* updateWinner() 
- * gameOver()?
+* gameOver()?
  
 
 #### Tile Class
@@ -190,31 +153,10 @@ IF a row, col, or diag are >= 3 AND no values are empty
  * look for xTurn or oTurn from parent
 * if its been clicked //abstracted 
  * true/false
+* value
+* index
+* element
 <!-- does NOT need to know where it is, that is the responsibility of the Board  -->
-
-
-##### View
-<!-- could inherit the generateHTML method -->
-* createTile()? <!--NEED TO DO -->
- * generateHTML('div', 'col-4')
-* updateView()
- * render x, o, or blank
-```
-Look in parent
-IF xTurn {
-    xDraw.innerText = "X";
-} ELSE {
-    oDraw.innerText = "O";
-}
-```
-
-##### Controller
-* onClick() 
- * runs view method
- * runs methods from parent (if needed)
-```
-tileClick.addEventListener('click', updateView);
-```
 
 
 #### Deconstruct and Identify
@@ -240,34 +182,3 @@ let ttt = new TicTacToe();
 
 #### Functionality
 I want to be able to have 2 users interacting in a game of tic-tac-toe, selecting O or X in the given square of the grid, and IF if there was a winner and how it was achieved.
-
-#### Objects and Data Structures
-* player1
-* player2
-* class TicTacToe{}
-* ttt
-* Model
-* View
- * holds state
-* Controller
- * an action happened, now update model
-* turns
-
-### START
-what happens in between?
-* INIT()
-### END
-
-#### Functions and such
-* init()
-* drawX()
-* drawO()
-* show()
-* hide()
-* win()
-* generateHTML()
- * setting up our game board
- * changing on state when user plays
- * show whose turn it is
-* resetGame()
- * runs init()
