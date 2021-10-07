@@ -1,11 +1,4 @@
-#### Ian Pseudocode 10/4
-##### Pseudocode of a class
-
-##### dev ops
-* setting up repo
-* deciding on final wireframe layout
-
-<!-- Tic Tac Toe Design Pattern -->
+### Pseudocode got TicTacToe
 
 ```
 function init() {
@@ -32,6 +25,13 @@ if (gameExists) {
 
 * gridArray = []
 
+
+##### View
+* generateView() 
+* generateHTML() -- could be global, or passed down to children
+
+
+##### Controller Methods
 ###### Stateful logic 
 * placement of x and o
  * array of objects of moves 
@@ -77,15 +77,12 @@ if (row, col, or diag % 3 == 0){
 ```
 * tie -- if no win, then it's a tie
 
+---
 
-##### View
-* generateView() 
-* generateHTML() -- could be global, or passed down to children <!--NEED TO DO -->
-* gameOver()
- * array of arrays of win solutions
- * nest for loops going through array
- * if solution total values = ? : x or o wins
- * if turn>8 and game still on, it's a tie
+* init()
+ * generate board
+ * reset board
+
 * showCurrentPlayer()
  ```
  if (numTurn % 2 == 0){
@@ -95,7 +92,22 @@ if (row, col, or diag % 3 == 0){
  }
  ```
 
- * game ended? <!-- IF winConditions are not met, it's a tie -->
+* click handler
+ * check turn
+ * give a click a value
+ * change view
+ * check win conditions
+
+* check turn
+ * see whose turn it is
+
+* gameOver()
+ * array of arrays of win solutions
+ * nest for loops going through array
+ * if solution total values = ? : x or o wins
+ * if turn>8 and game still on, it's a tie
+
+* game ended? <!-- IF winConditions are not met, it's a tie -->
 ```
 function gameOver() {
     IF playerX meets winConditions(){
@@ -107,21 +119,6 @@ function gameOver() {
     }
 }
 ```
-
-
-##### Controller Methods
-* init()
- * generate board
- * reset board
-
-* click handler
- * check turn
- * give a click a value
- * change view
- * check win conditions
-
-* check turn
- * see whose turn it is
 
 * delete
  * set grid values back to empty
@@ -135,14 +132,6 @@ function restart() {
     init();
 }
 ```
-
-* check win?
-```
-IF a row, col, or diag are >= 3 AND no values are empty
-    winConditions();
-```
-
-* gameOver()?
  
 
 #### Tile Class

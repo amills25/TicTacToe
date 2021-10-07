@@ -17,6 +17,7 @@ class TicTacToe {
         this.gameStatus = "on";
 
     }
+    
 
     //VIEW METHODS
     generateView() {
@@ -49,6 +50,59 @@ class TicTacToe {
         }
 
         return element;
+    }
+
+
+    //CONTROLLER METHODS
+    init() {
+        //console.log("init(TicTacToe)");
+        this.generateView();
+        document.getElementById("restartBtn").onclick = this.restart.bind(this);
+    }
+
+    //show current player
+    currentPlayer() {
+        if (this.numTurn % 2 == 0) {
+            this.playerTurn.innerText = "It's player O's turn.";
+        } else {
+            this.playerTurn.innerText = "It's player X's turn.";
+        }
+    }
+
+    //what happens when the tile is clicked
+    handleClick(index) {
+        //console.log(this.gridArray[index]);
+        //seeing if it was clicked and game is active
+        if (!this.gridArray[index].wasClicked && this.gameStatus == "on") { 
+            this.checkTurn(index);
+            
+            //gives a tile a value so we can check win conditions later
+            if (this.numTurn % 2 == 0) { 
+                this.gridArray[index].value = -1;
+            } else {
+                this.gridArray[index].value = 1;
+            }
+            //console.log(typeof this.gridArray[0].value);
+
+            this.currentPlayer();
+            this.numTurn++;
+            this.gridArray[index].wasClicked = true;
+
+            //run win conditions if 5 or more tiles clicked
+            if (this.numTurn > 4){
+                this.gameOver();
+            }
+        }
+    }
+
+    //whose turn is it?
+    checkTurn(index) {
+        //console.log(this.numTurn, this.gridArray, index);
+        if (this.numTurn % 2 == 0){
+            this.gridArray[index].element.innerText = "X";
+        } else {
+            this.gridArray[index].element.innerText = "O";
+        }
     }
 
     //win conditions
@@ -88,58 +142,6 @@ class TicTacToe {
         //if every tile has been clicked and no winner, it's a tie
         if (this.numTurn == 9 && this.gameStatus == "on"){
             this.playerTurn.innerText = "IT'S A TIE";
-        }
-    }
-
-    //show current player
-    currentPlayer() {
-        if (this.numTurn % 2 == 0) {
-            this.playerTurn.innerText = "It's player O's turn.";
-        } else {
-            this.playerTurn.innerText = "It's player X's turn.";
-        }
-    }
-
-    //CONTROLLER METHODS
-    init() {
-        //console.log("init(TicTacToe)");
-        this.generateView();
-        document.getElementById("restartBtn").onclick = this.restart.bind(this);
-    }
-
-    //what happens when the tile is clicked
-    handleClick(index) {
-        //console.log(this.gridArray[index]);
-        //seeing if it was clicked and game is active
-        if (!this.gridArray[index].wasClicked && this.gameStatus == "on") { 
-            this.checkTurn(index);
-            
-            //gives a tile a value so we can check win conditions later
-            if (this.numTurn % 2 == 0) { 
-                this.gridArray[index].value = -1;
-            } else {
-                this.gridArray[index].value = 1;
-            }
-            //console.log(typeof this.gridArray[0].value);
-
-            this.currentPlayer();
-            this.numTurn++;
-            this.gridArray[index].wasClicked = true;
-
-            //run win conditions if 5 or more tiles clicked
-            if (this.numTurn > 4){
-                this.gameOver();
-            }
-        }
-    }
-
-    //whose turn is it?
-    checkTurn(index) {
-        //console.log(this.numTurn, this.gridArray, index);
-        if (this.numTurn % 2 == 0){
-            this.gridArray[index].element.innerText = "X";
-        } else {
-            this.gridArray[index].element.innerText = "O";
         }
     }
 
