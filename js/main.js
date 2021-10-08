@@ -27,8 +27,8 @@ class TicTacToe {
 
         //dynamic rendering to create the game board
         for (let index = 0; index < 9; index++) {
-            let col = this.generateHTML({ type: 'div', classes: 'col-4 text-center border border-dark lh-lg', parent: row, text: "", styles: 'min-width: 16vw; min-height: 14vw;', id: index });
-            let button = this.generateHTML({ type: 'button', classes: 'btn', parent: col, text: "", styles: 'min-width: 100%; min-height: 99%; font-size: 8vw;', text: "", onclick: this.handleClick.bind(this, index) });
+            let col = this.generateHTML({ type: 'div', classes: 'col-4 text-center border border-dark lh-lg', parent: row, text: "", styles: 'min-width: 14w; min-height: 12vw;', id: index });
+            let button = this.generateHTML({ type: 'button', classes: 'btn', parent: col, text: "", styles: 'min-width: 100%; min-height: 99%; font-size: 6vw;', text: "", onclick: this.handleClick.bind(this, index) });
             let tile = new Tile(button, index);
             this.gridArray.push(tile);
             //save tile object as well
@@ -63,9 +63,9 @@ class TicTacToe {
     //show current player
     currentPlayer() {
         if (this.numTurn % 2 == 0) {
-            this.playerTurn.innerText = "It's player O's turn.";
+            this.playerTurn.innerText = "It's Player O's turn.";
         } else {
-            this.playerTurn.innerText = "It's player X's turn.";
+            this.playerTurn.innerText = "It's Player X's turn.";
         }
     }
 
@@ -99,9 +99,9 @@ class TicTacToe {
     checkTurn(index) {
         //console.log(this.numTurn, this.gridArray, index);
         if (this.numTurn % 2 == 0){
-            this.gridArray[index].element.innerText = "X";
+            this.gridArray[index].element.innerText = "❌";
         } else {
-            this.gridArray[index].element.innerText = "O";
+            this.gridArray[index].element.innerText = "⭕";
         }
     }
 
@@ -129,11 +129,11 @@ class TicTacToe {
                 winRow += this.gridArray[this.possibleWins[i][j]].value;
                 console.log(winRow);
                 if (winRow === -3) {
-                    this.playerTurn.innerText = "PLAYER X WINS!";
+                    this.playerTurn.innerText = "PLAYER ❌ WINS!";
                     this.gameStatus = "off";
                 } 
                 if (winRow === 3) {
-                    this.playerTurn.innerText = "PLAYER O WINS!";
+                    this.playerTurn.innerText = "PLAYER ⭕ WINS!";
                     this.gameStatus = "off";
                 } 
             }
@@ -141,7 +141,7 @@ class TicTacToe {
         }
         //if every tile has been clicked and no winner, it's a tie
         if (this.numTurn == 9 && this.gameStatus == "on"){
-            this.playerTurn.innerText = "IT'S A TIE";
+            this.playerTurn.innerText = "DRAW! IT'S A CAT'S GAME! 🐈";
         }
     }
 
@@ -151,7 +151,7 @@ class TicTacToe {
         this.gridArray = [];
         this.numTurn = 0;
         this.app.innerText = "";
-        this.playerTurn.innerText = "It's player X's turn.";
+        this.playerTurn.innerText = "It's Player X's turn.";
     }
 
     //restarting a game
